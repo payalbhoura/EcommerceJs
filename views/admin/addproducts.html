@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>seller</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+        }
+
+        .header {
+            width: 100%;
+            height: 14vh;
+            box-shadow: 0px 0px 12px grey;
+            /* background-color: rgb(253, 251, 248); */
+            color: grey;
+            font-weight: bolder;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 0;
+        }
+
+        .upperheader {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            flex-direction: row;
+            font-size: x-large;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .lowerheader {
+            width: 100%;
+            height: 40%;
+            /* background-color: aliceblue; */
+            background-image: linear-gradient(rgb(109, 169, 203), rgb(90, 93, 143));
+
+            display: flex;
+        }
+
+        .action {
+            width: 60%;
+            height: 100%;
+            /* background-color: beige; */
+            display: flex;
+            align-items: center;
+
+        }
+
+        .log_con {
+            /* background-color: brown; */
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            margin-left: 140px;
+            height: 100%;
+        }
+
+        #home,
+        #addproducts,
+        #order {
+            margin: 8px 40px;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+        }
+
+        #profile,
+        #logout {
+            font-size: 14px;
+            margin: 0px 40px;
+            text-decoration: none;
+            color: white;
+        }
+
+        #home:hover,
+        #cart:hover,
+        #order:hover,
+        #profile:hover,
+        #logout:hover {
+            text-decoration: underline;
+            color: darkblue;
+        }
+
+
+        input {
+            box-shadow: 0px 1px 2px grey;
+            border: none;
+        }
+
+        .form {
+            margin-top: 80px;
+            width: 50%;
+            height: 70vh;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 17px;
+            /* background-color: aqua; */
+        }
+
+        .Pname,
+        .Pprice,
+        .Pdes,
+        .Pquantity,
+        .img {
+            display: flex;
+            width: 300px;
+            justify-content: space-between;
+            margin: 20px;
+            font-weight: 700;
+            width: 90%;
+            height: 5%;
+            /* background-color: aliceblue; */
+        }
+
+        #Pname,
+        #Pprice,
+        #Pdes,
+        #Pquantity,
+        #img {
+            width: 80%;
+        }
+
+        .addbtn {
+
+            border: none;
+            padding: 0.5em;
+            /* box-shadow: 0px 0px 3px darkgray; */
+            /* background-image: linear-gradient(rgb(248, 94, 94), rgb(74, 1, 74)); */
+            color: white;
+            font-weight: bolder;
+        }
+
+        button {
+            border: none;
+            border: none;
+            color: white;
+            /* background-image: linear-gradient(rgb(109, 169, 203), rgb(90, 93, 143)); */
+            background-image: linear-gradient(rgb(248, 94, 94), rgb(74, 1, 74));
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+
+        h1 {
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="upperheader"> WELCOME TO ABC </div>
+
+        <div class="lowerheader">
+            <div class="action">
+                <a href="adminhomepage.html" id="home">HOME</a>
+                <a href="" id="order">ORDERS</a>
+                <!-- <a href="/seller/addProduct" id="addproducts">ADD PRODUCTS</a> -->
+            </div>
+
+            <div class="log_con">
+                <!-- <div id="profile">USERNAME</div> -->
+                <a onclick="logout()" id="logout">LOGOUT</a>
+            </div>
+        </div>
+    </div>
+
+
+    <form class="form" id="form" enctype="multipart/form-data">
+        <h1>ADD PRODUCTS</h1>
+
+        <input class="Pname" type="text" name="name" id="Pname" placeholder="Product Name" required>
+
+        <input class="Pprice" type="text" name="price" id="Pprice" placeholder="Product Price" required>
+
+        <input class="Pdes" type="text" name="des" id="Pdes" placeholder="Product Description" required>
+
+        <input class="Pquantity" type="text" name="stock" id="Pquantity" placeholder="Product Quantity" required>
+
+        <input class="img" type="file" name="img" id="img" placeholder="Browse.." required>
+
+        <div class="btn" id="btn">
+            <button type="submit" id="btn">Add Products</button>
+        </div>
+    </form>
+
+    
+
+
+
+    <script>
+        const btn = document.getElementById('btn');
+        
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+    
+            // Retrieve input values
+            const name = document.getElementById('Pname').value.trim();
+            const des = document.getElementById('Pdes').value.trim();
+            const stock = document.getElementById('Pquantity').value.trim();
+            const price = document.getElementById('Pprice').value.trim();
+            const img = document.getElementById('img').files[0];
+            // if(name =="" || des=="" || stock=="" || price==""){
+            //     alert("enter the value");
+            // }
+        
+          console.log(img);
+    
+            // Create product data object
+            const productData = {
+                id: Math.random(),
+                name: name,
+                des: des,
+                stock: stock,
+                price: price,
+                image: img ? img.name : '' // Store only the image name for simplicity
+            };
+    
+            // Retrieve previous data from local storage
+            const previousDataString = localStorage.getItem('product');
+            const previousData = previousDataString ? JSON.parse(previousDataString) : [];
+        
+            // Append new product data
+            previousData.push(productData);
+            localStorage.setItem('product', JSON.stringify(previousData));
+            alert("Product Added Successfully")
+            
+            setTimeout(() => {
+                window.location.href="adminhomepage.html" 
+            }, 2000);
+            
+
+        });
+    </script>
+    
+    
+
+</body>
+
+</html>

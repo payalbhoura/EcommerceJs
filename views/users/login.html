@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        .all {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .header {
+            width: 100%;
+            height: 10vh;
+            /* box-shadow: 0px 0px 15px grey; */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            /* background-color: rgb(253, 251, 248); */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        .upperheader {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            flex-direction: row;
+            font-size: xX-large;
+            justify-content: center;
+            align-items: center;
+            font-weight: bolder;
+            color: grey;
+        }
+
+        .upperheader:hover {
+            zoom: 110%;
+        }
+
+
+        h1 {
+            background-image: linear-gradient(rgb(109, 169, 203), rgb(90, 93, 143));
+            border: none;
+            border-radius: 5px;
+            color: white;
+            width: 30%;
+            text-align: center;
+        }
+
+        .logincontainer {
+            width: 50%;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 80px;
+            padding: 10px 17px;
+        }
+
+        .username,
+        .password {
+
+            /* background-color: aliceblue; */
+            margin: 20px;
+            font-weight: 700;
+            /* width:10%; */
+        }
+
+        input {
+            border: none;
+            box-shadow: 1px 1px 2px grey;
+            margin-left: 30px;
+        }
+
+        .btn {
+            width: 10%;
+
+        }
+
+
+        #login {
+            background-image: linear-gradient(rgb(248, 94, 94), rgb(74, 1, 74));
+            color: white;
+            border: none;
+            padding: 5px;
+            font-weight: bolder;
+            border-radius: 12px;
+            width: auto;
+        }
+
+        #login:hover {
+            background-image: linear-gradient(rgb(131, 9, 9), rgb(74, 1, 74));
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .message {
+            width: 30%;
+            height: 10%;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all">
+        <div class="header">
+            <div class="upperheader"> WELCOME TO ABC </div>
+        </div>
+        <div class="logincontainer">
+            <H1>LOGIN</H1>
+            <div class="username">
+                Username:<input type="text" name="" id="email">
+                <div id="emailError" class="error-message"></div>
+            </div>
+            <div class="password">
+                Password: <input type="password" name="" id="password">
+            </div>
+            <p id="passwordError" class="error-message"></p>
+            <div class="btn">
+                <button id="login">LOGIN</button>
+            </div>
+            <div class="signup">
+                <a href="signup.html">Create Account Signup</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById('login').addEventListener("click", function () {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var flag = 0;
+        //retrieving the existing logis from local storage or initialiize an empty array
+        var previousLogins = JSON.parse(localStorage.getItem('user')) || [];
+        console.log(previousLogins);
+        previousLogins.forEach(element => {
+            if (element.email == email) {
+                if (element.password != password) {
+                    alert("password Incorrect")
+                } else {
+                    if (element.role =="admin") {
+                        window.location.href ="../admin/adminhomepage.html"
+                    } else{
+                        window.location.href = "homepage.html"
+                    }
+                    flag = -1;
+                }
+            }
+            flag++;
+        });
+        console.log(previousLogins.length, "flag", flag);
+        if (previousLogins.length == flag) {
+            alert("email is not exist")
+        }
+
+    });
+</script>
+
+</html>

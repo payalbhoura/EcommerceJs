@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart</title>
+    <style>
+        *root {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            /* background-color: #0f3650; */
+        }
+
+        .c_body {
+            width: 100vw;
+            height: 100vh;
+            /* background-color: aqua; */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .all {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .header {
+            width: 100%;
+            height: 10vh;
+            /* box-shadow: 0px 0px 15px grey; */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+
+            /* background-color: rgb(253, 251, 248); */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        .upperheader {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            flex-direction: row;
+            font-size: xX-large;
+            justify-content: center;
+            align-items: center;
+            font-weight: bolder;
+            color: grey
+        }
+
+        .lowerheader {
+            width: 100%;
+            height: 60%;
+            background-color: aliceblue;
+            display: flex;
+            background-image: linear-gradient(rgb(109, 169, 203), rgb(90, 93, 143));
+        }
+
+        .action {
+            width: 60%;
+            height: 100%;
+            /* background-color: beige; */
+            display: flex;
+            align-items: center;
+
+        }
+
+        #home,
+        #order {
+            margin: 8px 40px;
+            font-weight: bolder;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+
+
+        }
+
+        .log_con {
+            /* background-color: brown; */
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            margin-left: 140px;
+            height: 100%;
+        }
+
+
+        #profile,
+        #logout {
+            font-size: 14px;
+            font-weight: bolder;
+            margin: 0px 40px;
+            text-decoration: none;
+            color: white;
+        }
+
+        #home:hover,
+        #order:hover,
+        #profile:hover,
+        #logout:hover {
+            text-decoration: underline;
+            color: darkblue;
+        }
+
+        .detailcontainer {
+            width: 100%;
+            height: 65vh;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            /* background-color: black; */
+            overflow: scroll;
+        }
+
+
+        .label {
+            width: 40%;
+            height: 10%;
+            /* background-color:rgb(251, 247, 247); */
+            box-shadow: 0px 0px 3px grey;
+            /* background-image:linear-gradient(rgb(248, 94, 94), rgb(74, 1, 74)); */
+            border-radius: 10px;
+            display: flex;
+            background-image: linear-gradient(rgb(109, 169, 203), rgb(90, 93, 143));
+            margin: 20px 32%;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            /* Light blue color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .cl_container {
+            width: 95%;
+            height: 20%;
+            border-radius: 3px;
+            margin-top: 40px;
+            display: flex;
+            box-shadow: 0px 0px 2px rgb(39, 38, 38);
+            background-color: rgb(248, 249, 250);
+            font-size: x-large;
+            font-family: Georgia, 'Times New Roman', Times, serif
+        }
+
+        .c_items {
+            width: 85%;
+            height: 100%;
+            /* background-color: antiquewhite; */
+            display: flex;
+            align-items: center;
+        }
+
+        .c_img {
+            width: 150px;
+            height: 100%;
+            /* background-color: black; */
+            margin: 0px 9px 0px 0px;
+        }
+
+        img {
+            width: 140px;
+            height: 100px;
+            border-radius: 50%;
+            /* background-color: rgb(186, 178, 178); */
+
+        }
+
+        .c_name {
+            width: 190px;
+            height: 100%;
+            /* background-color: rgb(198, 8, 8); */
+            margin: 0px 9px 0px 0px;
+            display: flex;
+            align-items: center;
+            font-size: large;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            justify-content: center;
+
+        }
+
+        .quantity {
+            width: 130px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin: 0px 9px 0px 0px;
+            background-color: rgba(245, 247, 248, 0.5);
+            /* Transparent blue */
+            box-shadow: 1px 2px 40px rgb(238, 238, 243);
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .left {
+            width: 40px;
+            /* background-color: rgb(17, 112, 196); */
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right {
+            width: 40px;
+            height: 100%;
+            /* background-color: blue; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0px 9px 0px 0px;
+        }
+
+        .positivebtn,
+        .negativebtn {
+            /* background-color: aqua; */
+            width: 100%;
+            height: 50%;
+            font-size: large;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .positivebtn {
+            width: 100%;
+            /* background-color: #033353; */
+            margin-top: 20px;
+            padding: 5px;
+
+
+        }
+
+        .negativebtn {
+            width: 100%;
+            /* background-color: #c71849; */
+            margin-bottom: 20px;
+            padding: 5px;
+
+        }
+
+        #p_btn {
+            height: 20px;
+            width: 20px;
+            margin-top: 9px;
+
+        }
+
+        #msg {
+            color: red;
+            align-items: center;
+
+        }
+
+        #n_btn {
+            height: 20px;
+            width: 20px;
+            margin-bottom: 9px;
+        }
+
+        /* Basic button styling */
+        button {
+            display: inline-block;
+            padding: 2px 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0px 0px px grey;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            /* Text color */
+            padding: 15px;
+            width: 100%;
+            background-image: linear-gradient(rgb(248, 94, 94), rgb(74, 1, 74));
+            /* Background color */
+
+        }
+
+        /* Hover effect */
+        button:hover {
+            background-color: #75b400;
+            /* Darker background color on hover */
+        }
+
+        .c_price {
+            /* background-color: rgb(222, 13, 73); */
+            width: 150px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .delbtn {
+            width: 10%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+        }
+
+        .sum_container {
+            width: 100%;
+            height: 30vh;
+            /* background-color: #fff; */
+            display: flex;
+            justify-content: end;
+            margin-top: 2%;
+        }
+
+        .datasumcontainer {
+            width: 50vh;
+            height: 50%;
+            box-shadow: 0px 1px 4px rgb(119, 119, 124);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /* background-color: rgb(149, 139, 145); */
+            border-radius: 30px;
+        }
+
+        #totalprice {
+            /* background-color: rgb(123, 0, 68); */
+            width: 30%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: x-large;
+            overflow: hidden;
+        }
+
+        #order_btn {
+            /* background-color: rgb(76, 224, 22); */
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* background-image: linear-gradient(rgb(248, 94, 94), rgb(74, 1, 74)); */
+
+        }
+
+        #sum_orderbtn {
+            font-size: x-large;
+            border: none;
+            box-shadow: 0px 2px 4px #0f3650;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="c_body">
+        <div class="all">
+            <div class="header">
+                <!-- Header content -->
+            </div>
+            <div class="detailcontainer">
+                <div class="label">
+                    <h1>YOUR SHOPPING CART</h1>
+                </div>
+                <h1 id="msg"> </h1>
+                <div id="cart_container">
+                    <!-- Cart items will be displayed here -->
+                </div>
+            </div>
+            <div class="sum_container">
+                <div class="datasumcontainer">
+                    <div id="totalprice">
+                        <p id="t_price">₹0</p>
+                    </div>
+                    <div id="order_btn"><button id="buyNow">Buy Now</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // JavaScript functions
+        function pclick(productId, price) {
+            let quantityElement = document.getElementById(`quant${productId}`);
+            let currentQuantity = parseInt(quantityElement.textContent);
+            currentQuantity++;
+            quantityElement.textContent = currentQuantity;
+            updateTotalPrice(price, 1);
+        }
+
+        function nclick(productId, price) {
+            let quantityElement = document.getElementById(`quant${productId}`);
+            let currentQuantity = parseInt(quantityElement.textContent);
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                quantityElement.textContent = currentQuantity;
+                updateTotalPrice(-price, -1);
+            }
+        }
+
+        function deleteCart(productId, price, quantity) {
+            let container = document.getElementById(`container_${productId}`);
+            container.remove();
+            updateTotalPrice(-price * quantity, -quantity);
+        }
+
+        function updateTotalPrice(price, quantityChange) {
+            let totalPriceElement = document.getElementById('t_price');
+            let currentTotal = parseInt(totalPriceElement.textContent.slice(1)); // Remove ₹ symbol
+            currentTotal += price * quantityChange;
+            totalPriceElement.textContent = `₹${currentTotal}`;
+        }
+
+        function loadtocart() {
+            const cartdata = JSON.parse(localStorage.getItem("cart")) || [];
+            cartdata.forEach(element => {
+                showcartproduct(element);
+            });
+        }
+
+        function showcartproduct(cart) {
+            const container = document.createElement("div");
+            container.className = "cl_container";
+            container.id = `container_${cart.p_id}`; // Changed the ID generation
+            container.innerHTML = `<div class="c_items">
+                                    <div class="c_img">
+                                        <img src="${cart.image}" alt="" />
+                                    </div>
+                                    <div class="c_name">${cart.name}</div>
+                                    <div class="quantity">
+                                        <div class="left">
+                                            <p id="quant${cart.p_id}"> ${cart.quantity}</p>
+                                        </div>
+                                        <div class="right">
+                                            <div class="positivebtn"> <button onclick ='pclick("${cart.p_id}",${cart.price})' >+</button></div>
+                                            <div class="negativebtn"><button onclick='nclick("${cart.p_id}",${cart.price})'>-</button></div>
+                                        </div>
+                                    </div>
+                                    <div class="c_price"  id="price${cart.p_id}"> ₹ ${cart.price * cart.quantity}</div>
+                                </div>
+                                <div class="delbtn" onclick='deleteCart("${cart.p_id}",${cart.price},${cart.quantity})'> <button>X</button></div>`;
+            document.getElementById("cart_container").appendChild(container);
+        }
+        loadtocart();
+    </script>
+</body>
+
+</html>
