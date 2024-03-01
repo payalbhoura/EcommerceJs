@@ -411,9 +411,11 @@
             if (currentQuantity > 1) {
                 currentQuantity--;
                 quantityElement.textContent = currentQuantity;
-                updateTotalPrice(-price, -1);
+                // Update total price by subtracting the price instead of adding it
+                updateTotalPrice(-price, 1);
             }
         }
+        
 
         function deleteCart(productId, price, quantity) {
             let container = document.getElementById(`container_${productId}`);
@@ -436,9 +438,10 @@
         }
 
         function showcartproduct(cart) {
+            console.log(cart,"cart")
             const container = document.createElement("div");
             container.className = "cl_container";
-            container.id = `container_${cart.p_id}`; // Changed the ID generation
+            container.id = `container_${cart.id}`; // Changed the ID generation
             container.innerHTML = `<div class="c_items">
                                     <div class="c_img">
                                         <img src="${cart.image}" alt="" />
@@ -446,16 +449,16 @@
                                     <div class="c_name">${cart.name}</div>
                                     <div class="quantity">
                                         <div class="left">
-                                            <p id="quant${cart.p_id}"> ${cart.quantity}</p>
+                                            <p id="quant${cart.id}"> ${cart.quantity}</p>
                                         </div>
                                         <div class="right">
-                                            <div class="positivebtn"> <button onclick ='pclick("${cart.p_id}",${cart.price})' >+</button></div>
-                                            <div class="negativebtn"><button onclick='nclick("${cart.p_id}",${cart.price})'>-</button></div>
+                                            <div class="positivebtn"> <button onclick ='pclick("${cart.id}",${cart.price})' >+</button></div>
+                                            <div class="negativebtn"><button onclick='nclick("${cart.id}",${cart.price})'>-</button></div>
                                         </div>
                                     </div>
-                                    <div class="c_price"  id="price${cart.p_id}"> ₹ ${cart.price * cart.quantity}</div>
+                                    <div class="c_price"  id="price${cart.id}"> ₹ ${cart.price * cart.quantity}</div>
                                 </div>
-                                <div class="delbtn" onclick='deleteCart("${cart.p_id}",${cart.price},${cart.quantity})'> <button>X</button></div>`;
+                                <div class="delbtn" onclick='deleteCart("${cart.id}",${cart.price},${cart.quantity})'> <button>X</button></div>`;
             document.getElementById("cart_container").appendChild(container);
         }
         loadtocart();
